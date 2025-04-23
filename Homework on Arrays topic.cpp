@@ -2,7 +2,6 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
-#include <vector>
 
 //Exercise 1. A sequence of numbers is given.
 //19)Display elements with even indexes (for a two-dimensional array, 
@@ -305,99 +304,78 @@ void task5()
 //19th option. Example 4. Insert a new column in front of all columns in which the specified 
 //number occurs.
 
-//Function for inserting columns
-void insertColumns(std::vector<std::vector<int>>& matrix, int value) {
-    //getting the dimensions of the matrix
-    size_t rows = matrix.size();
-    size_t cols = matrix[0].size();
+void task6() 
+{
+    int n, f, m, i, j, k, number;
 
-    //finding the columns in which the specified number occurs
-    std::vector<size_t> columnsToInsert;
-    for (size_t j = 0; j < cols; ++j) {
-        for (size_t i = 0; i < rows; ++i) {
-            if (matrix[i][j] == value) {
-                columnsToInsert.push_back(j);
-                break; //it is enough to find one match in the column
+    //entering the number of rows and columns
+    std::cout << "rows: "; 
+    std::cin >> n;
+    std::cout << "columns: "; 
+    std::cin >> m;
+    int** a = new int* [n];
+    for (i = 0; i < n; i++)
+        a[i] = new int[2 * m];
+
+    //entering the numbers of array
+    std::cout << "numbers: \n";
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+            std::cin >> a[i][j];
+
+    //entering the numbers for column
+    int* x = new int[n];
+    std::cout << "numbers for a new column: \n";
+    for (i = 0; i < n; i++)
+        std::cin >> x[i];
+
+    //entering the number for search
+    std::cout << "number for search: ";
+    std::cin >> number;
+
+    //output a source array
+    std::cout << "source array:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            std::cout << a[i][j] << " ";
+        }
+    }
+    std::cout << std::endl;
+
+    //inserting a new column into the source array
+    for (j = 0; j < m; j++)
+    {
+        f = 0;
+        for (i = 0; i < n; i++)
+            if (a[i][j] == number)
+            {
+                f = 1; 
+                break;
             }
+        if (f == 1)
+        {
+            for (k = m; k > j; k--)
+                for (i = 0; i < n; i++)
+                    a[i][k] = a[i][k - 1];
+            for (i = 0; i < n; i++)
+                a[i][j] = x[i];
+            m++; j++;
         }
     }
 
-    //if there are columns to insert
-    if (!columnsToInsert.empty()) {
-        //creating a new matrix with an increased columns number
-        size_t newCols = cols + columnsToInsert.size();
-        std::vector<std::vector<int>> newMatrix(rows, std::vector<int>(newCols));
-
-        //indexes for new matrix
-        size_t newColIndex = 0;
-        size_t oldColIndex = 0;
-
-        //going through all the columns of the matrix
-        for (size_t i = 0; i < columnsToInsert.size(); ++i) {
-
-            //Copying columns up to the current index
-            while (oldColIndex < columnsToInsert[i]) {
-                for (size_t row = 0; row < rows; ++row) {
-                    newMatrix[row][newColIndex] = matrix[row][oldColIndex];
-                }
-                ++newColIndex;
-                ++oldColIndex;
-            }
-
-            //inserting new column
-            for (size_t row = 0; row < rows; ++row) {
-                newMatrix[row][newColIndex] = 0; // Заполняем нулями
-            }
-            ++newColIndex;
-
-            //copying current column
-            for (size_t row = 0; row < rows; ++row) {
-                newMatrix[row][newColIndex] = matrix[row][oldColIndex];
-            }
-            ++newColIndex;
-            ++oldColIndex;
-        }
-
-        //copying remaining columns
-        while (oldColIndex < cols) {
-            for (size_t row = 0; row < rows; ++row) {
-                newMatrix[row][newColIndex] = matrix[row][oldColIndex];
-            }
-            ++newColIndex;
-            ++oldColIndex;
-        }
-
-        //replacing the original matrix
-        matrix = std::move(newMatrix);
-    }
-}
-
-//function for matrix output
-void printMatrix(const std::vector<std::vector<int>>& matrix) {
-    for (const auto& row : matrix) {
-        for (int val : row) {
-            std::cout << val << " ";
-        }
+    //displaying the new array on the screen
+    std::cout << "new array: \n";
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+            std::cout << a[i][j] << " ";
         std::cout << std::endl;
     }
-}
 
-void task6() {
-    //usage example 
-    std::vector<std::vector<int>> matrix = {
-        {1, 2, 3, 7},
-        {7, 6, 7, 8},
-        {9, 7, 11, 12}
-    };
-
-    std::cout << "Original matrix:" << std::endl;
-    printMatrix(matrix);
-
-    int value = 7;
-    insertColumns(matrix, value);
-
-    std::cout << "\nMatrix after insertion:" << std::endl;
-    printMatrix(matrix);
+    //freeing up memory
+    for (i = 0; i < n; i++)
+        delete a[i];
+    delete[]a;
 }
 
 int main()
