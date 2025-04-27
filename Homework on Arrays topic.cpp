@@ -7,73 +7,29 @@
 //19)Display elements with even indexes (for a two-dimensional array, 
 //the sum of the indexes must be even)
 
-//function for one-dimensional array
-void array1()
+void task1()
 {
     //One-dimensional array
     int countp = 0;
     int arr[] = { 1, 2, 3, 4, 5 };
     int size = sizeof(arr) / sizeof(arr[0]);
 
-    // Opening the file in write mode
-    std::ofstream outfile("one-dimensional_array.txt");
-    if (!outfile.is_open()) {
-        std::cerr << "Failed to open file for writing.\n";
-    }
-
-    // Writing the array elements to the file
-    for (int i = 0; i < size; ++i) {
-        outfile << arr[i] << " ";
-    }
-
-    // Closing the file
-    outfile.close();
-
-    // Opening the file in read mode
-    std::ifstream infile("one-dimensional_array.txt");
-
-    // Reading the array elements from the file
-    for (int i = 0; i < size; ++i) {
-        infile >> arr[i];
-    }
-
-    // Closing the file
-    infile.close();
-
-    // Displaying the array elements
-    std::cout << "One-dimensional array elements: \n" << std::endl;
-    for (int i = 0; i < 5; ++i) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "One-dimensional array elements with even indexes: \n" << std::endl;
-    for (int i = 0; i < size; ++i) {
-        if (i % 2 == 0) {
-            std::cout << arr[i] << " ";
-        }
-    }
-}
-//function for two-dimensional array
-void array2()
-{
-
     //Two-dimensional array
     const int rows = 3;
     const int cols = 3;
-    int matrix[rows][cols] = {
-        {1, 2, 3},
-        {5, 6, 7},
-        {9, 10, 11}
-    };
+    int matrix[rows][cols] = { {1, 2, 3}, {5, 6, 7}, {9, 10, 11} };
 
     // Opening the file in write mode
-    std::ofstream outfile("two-dimensional_array.txt");
+    std::ofstream outfile("elements of two arrays.txt"); //file for storing two arrays elements
     if (!outfile.is_open()) {
-        std::cerr << "Failed to open file for writing.\n";
+        std::cerr << "Failed to open file for writing." << std::endl;
     }
 
-    // Writing the array elements to the file
+    // Writing the one-dimensional array elements to the file
+    for (int i = 0; i < size; ++i) {
+        outfile << arr[i] << " ";
+    }
+    // Writing the two-dimensional array elements to the file
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j)
         {
@@ -85,9 +41,13 @@ void array2()
     outfile.close();
 
     // Opening the file in read mode
-    std::ifstream infile("two-dimensional_array.txt");
+    std::ifstream infile("arrays.txt");
 
-    // Reading the array elements from the file
+    // Reading the one-dimensional array elements from the file
+    for (int i = 0; i < size; ++i) {
+        infile >> arr[i];
+    }
+    // Reading the two-dimensional array elements from the file
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             infile >> matrix[i][j];
@@ -97,8 +57,23 @@ void array2()
     // Closing the file
     infile.close();
 
-    // Displaying the array elements
-    std::cout << "Two-dimensional array elements: \n" << std::endl;
+    // Displaying the one-dimensional array elements
+    std::cout << "One-dimensional array elements: \n";
+    for (int i = 0; i < 5; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "One-dimensional array elements with even indexes: \n";
+    for (int i = 0; i < size; ++i) {
+        if (i % 2 == 0) {
+            std::cout << arr[i] << " ";
+        }
+    }
+    std::cout << std::endl;
+
+    // Displaying the two-dimensional array elements
+    std::cout << "Two-dimensional array elements: \n";
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             std::cout << matrix[i][j] << " ";
@@ -106,22 +81,17 @@ void array2()
     }
     std::cout << std::endl;
 
-    std::cout << "Two-dimensional array elements with even indexes: \n" << std::endl;
+    std::cout << "Two-dimensional array elements with even indexes: \n";
 
     //Output of elements with even indexes
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             if (i % 2 == 0 && j % 2 == 0) {
-                std::cout << "Element [" << i << "][" << j << "] = " << matrix[i][j] << std::endl;
+                std::cout << matrix[i][j] << " ";
             }
         }
     }
-}
-
-void task1()
-{
-    array1();
-    array2();
+    std::cout << std::endl;
 }
 
 //Exercise 2. A sequence of n-real numbers is given
@@ -130,17 +100,16 @@ void task1()
 void task2()
 {
     int count = 0;
-    int array[] = { 1, 2, 4, 3, 5};
-    int size = sizeof(array);//outputs a size of the array
+    int array[5] = { 1, 2, 4, 3, 5};
 
     // Opening the file in write mode
-    std::ofstream outfile("array2.txt");
+    std::ofstream outfile("array.txt");
     if (!outfile.is_open()) {
-        std::cerr << "Failed to open file for writing.\n";
+        std::cerr << "Failed to open file for writing." << std::endl;
     }
 
     // Writing the array elements to the file
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < 5; ++i) {
         outfile << array[i] << " ";
     }
 
@@ -148,10 +117,10 @@ void task2()
     outfile.close();
 
     // Opening the file in read mode
-    std::ifstream infile("array2.txt");
+    std::ifstream infile("array.txt");
 
     // Reading the array elements from the file
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < 5; ++i) {
         infile >> array[i];
     }
 
@@ -159,13 +128,13 @@ void task2()
     infile.close();
 
     // Displaying the array elements
-    std::cout << "Array elements: \n" << std::endl;
+    std::cout << "Array elements: \n";
     for (int i = 0; i < 5; ++i) {
         std::cout << array[i] << " ";
     }
     std::cout << std::endl;
 
-    for (int i = 1; i != size; i++) {
+    for (int i = 1; i != 5; i++) {
         if (array[i] % array[i - 1] == 0) {
             count++;
         }
@@ -179,10 +148,10 @@ void task2()
 void task3()
 {
     int n, m;
-    int mxc = 0;
-    std::cout << "Enter n and m: ";
+    int max = 0;
+    std::cout << "Enter the number of rows and columns: " ;
     std::cin >> n >> m;
-    std::cout << "Enter a numbers: \n";
+    std::cout << "Enter the numbers: ";
     int** a = new int* [n];
 
     for (int i = 0; i < n; ++i) {
@@ -193,14 +162,15 @@ void task3()
 
     for (int i = 0; i < n; ++i) {
         for (int j = 1; j < m; ++j)
-            if (a[i][j] > a[i][mxc])
-                mxc = j;
+            if (a[i][j] > a[i][max])
+                max = j;
 
 
-        a[i][mxc] = a[i][m - mxc - 1];
+        a[i][max] = a[i][m - max - 1];
     }
 
-    std::cout << "result array:\n";
+    //output a modified array
+    std::cout << "The array after replacing the elements:\n";
 
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
@@ -226,7 +196,7 @@ void task4()
     int size;
 
     //Inputing an array size
-    std::cout << "size of array (n*n): ";
+    std::cout << "Enter the array size (n*n): ";
     std::cin >> size;
 
     //Creating a dynamic two-dimensional array
@@ -236,13 +206,13 @@ void task4()
     }
 
     //Creating an array for storing results
-    int* results = new int[size];  // Исправлено объявление
+    int* results = new int[size];
 
     //Inputing an array elements
-    std::cout << "elements:" << std::endl;
+    std::cout << "Elements:" << std::endl;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            std::cout << "element [" << i << "][" << j << "]: ";
+            std::cout << "Element [" << i << "][" << j << "]: ";
             std::cin >> matrix[i][j];
         }
     }
@@ -268,7 +238,7 @@ void task4()
     }
 
     //Displaying results
-    std::cout << "numbers of the first pairs of unequal elements:" << std::endl;
+    std::cout << "The numbers of the first pairs of unequal elements:\n";
     for (int i = 0; i < size; i++) {
         std::cout << results[i] << " "; 
     } 
@@ -278,69 +248,81 @@ void task4()
 
 //Exercise 5.
 //In a one-dimensional array whose elements are integers, perform the following actions:
-//19th option. Example 4. Remove all elements from the array whose last digit is equal to this value. 
+// 19th option. Example 4. Remove all elements from the array whose last digit is equal to this value. 
 
 void task5()
 {
-    int n;
-    std::cout << "Enter n: \n";
-    std::cin >> n;
+    int arr[5];
+    std::cout << "Enter the array numbers: ";
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < 5; ++i)
     {
-        int a[5];
-        std::cout << "a[" << i << "]=";
-        std::cin >> a[i];
-
-        if (a[i] % 10 == n) {
-            std::cout << a[i] << " ";
-            std::cout << std::endl;
-        }
+        std::cin >> arr[i];
     }
+
+    int x;
+    std::cout << "Enter the number for search: ";
+    std::cin >> x;
+    int s = 0;
+
+    for (int i = 0; i < 5; ++i) {
+        arr[i - s] = arr[i];    
+
+        if (arr[i] == x) {
+            ++s;
+        } 
+    }
+
+    //output a modified array
+    std::cout << "The array after removing elements: \n";
+    for (int i = 0; i < 5 - s; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
 }
 
 //Exercise 6.
 //In a two - dimensional array whose elements are integers, perform the following actions :
-//19th option. Example 4. Insert a new column in front of all columns in which the specified 
-//number occurs.
+//19th option. Example 4. 
+// Insert a new column in front of all columns in which the specified number occurs.
 
 void task6() 
 {
     int n, f, m, i, j, k, number;
 
     //entering the number of rows and columns
-    std::cout << "rows: "; 
+    std::cout << "Rows: "; 
     std::cin >> n;
-    std::cout << "columns: "; 
+    std::cout << "Columns: "; 
     std::cin >> m;
     int** a = new int* [n];
     for (i = 0; i < n; i++)
         a[i] = new int[2 * m];
 
     //entering the numbers of array
-    std::cout << "numbers: \n";
+    std::cout << "Numbers: \n";
     for (i = 0; i < n; i++)
         for (j = 0; j < m; j++)
             std::cin >> a[i][j];
 
     //entering the numbers for column
     int* x = new int[n];
-    std::cout << "numbers for a new column: \n";
+    std::cout << "The numbers for a new column: ";
     for (i = 0; i < n; i++)
         std::cin >> x[i];
 
     //entering the number for search
-    std::cout << "number for search: ";
+    std::cout << "The number for search: ";
     std::cin >> number;
 
     //output a source array
-    std::cout << "source array:\n";
+    std::cout << "Source array:\n";
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             std::cout << a[i][j] << " ";
         }
+        std::cout << std::endl;
     }
-    std::cout << std::endl;
 
     //inserting a new column into the source array
     for (j = 0; j < m; j++)
@@ -363,8 +345,8 @@ void task6()
         }
     }
 
-    //displaying the new array on the screen
-    std::cout << "new array: \n";
+    //output a modified array
+    std::cout << "The array after inserting columns: \n";
     for (i = 0; i < n; i++)
     {
         for (j = 0; j < m; j++)
