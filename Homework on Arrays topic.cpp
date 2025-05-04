@@ -147,42 +147,67 @@ void task2()
 
 void task3()
 {
-    int n, m;
-    int max = 0;
-    std::cout << "Enter the number of rows and columns: " ;
-    std::cin >> n >> m;
-    std::cout << "Enter the numbers: ";
-    int** a = new int* [n];
+    
+    // Entering an array size
+    std::cout << "Size n*n: ";
+    int n;
+    std::cin >> n;
 
-    for (int i = 0; i < n; ++i) {
-        a[i] = new int[m];
-        for (int j = 0; j < m; ++j)
-            std::cin >> a[i][j];
+    // Creating a dynamic array
+    int** array = new int* [n];
+    for (int i = 0; i < n; i++) {
+        array[i] = new int[n];
     }
 
-    for (int i = 0; i < n; ++i) {
-        for (int j = 1; j < m; ++j)
-            if (a[i][j] > a[i][max])
-                max = j;
-
-
-        a[i][max] = a[i][m - max - 1];
-    }
-
-    //output a modified array
-    std::cout << "The array after replacing the elements:\n";
-
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            std::cout << std::setw(4) << a[i][j];
+    // Entering an elements array
+    std::cout << "Elements:";
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                std::cin >> array[i][j];
+            }
         }
 
-        std::cout << std::endl;
+    //Displaying an original array
+    std::cout << "Original array: \n";
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                std::cout << array[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
+
+    //Finding maximum in each row and replacing with opposite element
+    for (int i = 0; i < n; i++) {
+        int max = array[i][0];  //1st element is maximal
+        int max_j = 0;         //memorizing the maximum position
+
+        // Finding maximum in the row
+        for (int j = 1; j < n; j++) {
+            if (array[i][j] > max) {
+                max = array[i][j];
+                max_j = j;
+            }
+        }
+
+        // Replacing element with opposite
+        array[i][max_j] *= -1;
     }
 
-    for (int i = 0; i < n; ++i)
-        delete[]a[i];
-    delete[] a;
+    // Displaying a modified array
+    std::cout << "Modified array: \n";
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                std::cout << array[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
+
+    //Freeing memory
+    for (int i = 0; i < n; i++) {
+        delete[] array[i];
+    }
+    delete[] array;
+
 }
 
 //Exercise 4. An array of size n*n is given, the elements of which are integers.
