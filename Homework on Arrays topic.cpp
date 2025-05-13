@@ -41,7 +41,7 @@ void task1()
     outfile.close();
 
     // Opening the file in read mode
-    std::ifstream infile("arrays.txt");
+    std::ifstream infile("elements of two arrays.txt");
 
     // Reading the one-dimensional array elements from the file
     for (int i = 0; i < size; ++i) {
@@ -103,7 +103,7 @@ void task2()
     int array[5] = { 1, 2, 4, 3, 5};
 
     // Opening the file in write mode
-    std::ofstream outfile("array.txt");
+    std::ofstream outfile("array2.txt");
     if (!outfile.is_open()) {
         std::cerr << "Failed to open file for writing." << std::endl;
     }
@@ -117,7 +117,7 @@ void task2()
     outfile.close();
 
     // Opening the file in read mode
-    std::ifstream infile("array.txt");
+    std::ifstream infile("array2.txt");
 
     // Reading the array elements from the file
     for (int i = 0; i < 5; ++i) {
@@ -146,8 +146,7 @@ void task2()
 // 19)Find the maximum in each row and replace it with the opposite element.
 
 void task3()
-{
-    
+{  
     // Entering an array size
     std::cout << "Size n*n: ";
     int n;
@@ -166,6 +165,40 @@ void task3()
                 std::cin >> array[i][j];
             }
         }
+
+    // Opening the file in write mode
+    std::ofstream outfile("array3.txt");
+    if (!outfile.is_open()) 
+    {
+        std::cerr << "Failed to open file for writing." << std::endl;
+    }
+
+    // Writing the two-dimensional array elements to the file
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            outfile << array[i][j] << " ";
+        }
+    }
+
+    // Closing the file
+    outfile.close();
+
+    // Opening the file in read mode
+    std::ifstream infile("array3.txt");
+
+    // Reading the two-dimensional array elements from the file
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            infile >> array[i][j];
+        }
+    }
+
+    // Closing the file
+    infile.close();
 
     //Displaying an original array
     std::cout << "Original array: \n";
@@ -207,7 +240,6 @@ void task3()
         delete[] array[i];
     }
     delete[] array;
-
 }
 
 //Exercise 4. An array of size n*n is given, the elements of which are integers.
@@ -216,7 +248,6 @@ void task3()
 
 void task4()
 {
-
     // Declaring array size
     int size;
 
@@ -226,7 +257,8 @@ void task4()
 
     //Creating a dynamic two-dimensional array
     int** matrix = new int* [size];  //Declaring an array
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) 
+    {
         matrix[i] = new int[size];
     }
 
@@ -234,22 +266,61 @@ void task4()
     int* results = new int[size];
 
     //Inputing an array elements
-    std::cout << "Elements:" << std::endl;
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
+    std::cout << "Elements: " << std::endl;
+    for (int i = 0; i < size; i++) 
+    {
+        for (int j = 0; j < size; j++) 
+        {
             std::cout << "Element [" << i << "][" << j << "]: ";
             std::cin >> matrix[i][j];
         }
     }
 
+    // Opening the file in write mode
+    std::ofstream outfile("array4.txt");
+    if (!outfile.is_open())
+    {
+        std::cerr << "Failed to open file for writing." << std::endl;
+    }
+
+    // Writing the two-dimensional array elements to the file
+    for (int i = 0; i < size; ++i)
+    {
+        for (int j = 0; j < size; ++j)
+        {
+            outfile << matrix[i][j] << " ";
+        }
+    }
+
+    // Closing the file
+    outfile.close();
+
+    // Opening the file in read mode
+    std::ifstream infile("array4.txt");
+
+    // Reading the two-dimensional array elements from the file
+    for (int i = 0; i < size; ++i)
+    {
+        for (int j = 0; j < size; ++j)
+        {
+            infile >> matrix[i][j];
+        }
+    }
+
+    // Closing the file
+    infile.close();
+
     //finding a first pair of unequal elements in the every string
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) 
+    {
         //A flag to check if a pair has been found.
         bool found = false;
 
         //checking a string elements
-        for (int j = 0; j < size - 1; j++) {
-            if (matrix[i][j] != matrix[i][j + 1]) {
+        for (int j = 0; j < size - 1; j++) 
+        {
+            if (matrix[i][j] != matrix[i][j + 1]) 
+            {
                 results[i] = j;
                 found = true;
                 break;  // exit the cycle as soon as we found a pair.
@@ -257,18 +328,20 @@ void task4()
         }
 
         //If pair is not found, writing "-1"
-        if (!found) {
+        if (!found) 
+        {
             results[i] = -1;
         }
     }
 
     //Displaying results
     std::cout << "The numbers of the first pairs of unequal elements:\n";
-    for (int i = 0; i < size; i++) {
-        std::cout << results[i] << " "; 
-    } 
-    std::cout << std::endl;
+    for (int i = 0; i < size; i++) 
+    {
+        std::cout << results[i] << " ";
+    }
 
+    std::cout << std::endl;
 }
 
 //Exercise 5.
@@ -278,6 +351,7 @@ void task4()
 void task5()
 {
     int arr[5];
+
     std::cout << "Enter the array numbers: ";
 
     for (int i = 0; i < 5; ++i)
@@ -285,24 +359,58 @@ void task5()
         std::cin >> arr[i];
     }
 
+    // Opening the file in write mode
+    std::ofstream outfile("array5.txt");
+    if (!outfile.is_open())
+    {
+        std::cerr << "Failed to open file for writing." << std::endl;
+    }
+
+    // Writing the array elements to the file
+    for (int i = 0; i < 5; ++i)
+    {
+        outfile << arr[i] << " ";
+    }
+
+    // Closing the file
+    outfile.close();
+
+    // Opening the file in read mode
+    std::ifstream infile("array5.txt");
+
+    // Reading the array elements from the file
+    for (int i = 0; i < 5; ++i)
+    {
+        infile >> arr[i];
+    }
+
+    // Closing the file
+    infile.close();
+
     int x;
+
     std::cout << "Enter the number for search: ";
     std::cin >> x;
+
     int s = 0;
 
-    for (int i = 0; i < 5; ++i) {
-        arr[i - s] = arr[i];    
+    for (int i = 0; i < 5; ++i) 
+    {
+        arr[i - s] = arr[i];
 
-        if (arr[i] == x) {
+        if (arr[i] == x) 
+        {
             ++s;
-        } 
+        }
     }
 
     //output a modified array
     std::cout << "The array after removing elements: \n";
-    for (int i = 0; i < 5 - s; ++i) {
+    for (int i = 0; i < 5 - s; ++i) 
+    {
         std::cout << arr[i] << " ";
     }
+
     std::cout << std::endl;
 }
 
@@ -313,27 +421,62 @@ void task5()
 
 void task6() 
 {
-    int n, f, m, i, j, k, number;
+    int n, f, m, number;
 
     //entering the number of rows and columns
-    std::cout << "Rows: "; 
+    std::cout << "Rows: ";
     std::cin >> n;
-    std::cout << "Columns: "; 
+    std::cout << "Columns: ";
     std::cin >> m;
+
     int** a = new int* [n];
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
         a[i] = new int[2 * m];
 
     //entering the numbers of array
     std::cout << "Numbers: \n";
-    for (i = 0; i < n; i++)
-        for (j = 0; j < m; j++)
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
             std::cin >> a[i][j];
+
+    // Opening the file in write mode
+    std::ofstream outfile("array6.txt");
+    if (!outfile.is_open())
+    {
+        std::cerr << "Failed to open file for writing." << std::endl;
+    }
+
+    // Writing the two-dimensional array elements to the file
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < m; ++j)
+        {
+            outfile << a[i][j] << " ";
+        }
+    }
+
+    // Closing the file
+    outfile.close();
+
+    // Opening the file in read mode
+    std::ifstream infile("array6.txt");
+
+    // Reading the two-dimensional array elements from the file
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < m; ++j)
+        {
+            infile >> a[i][j];
+        }
+    }
+
+    // Closing the file
+    infile.close();
 
     //entering the numbers for column
     int* x = new int[n];
     std::cout << "The numbers for a new column: ";
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
         std::cin >> x[i];
 
     //entering the number for search
@@ -341,47 +484,60 @@ void task6()
     std::cin >> number;
 
     //output a source array
-    std::cout << "Source array:\n";
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
+    std::cout << "Source array: \n";
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 0; j < m; j++) 
+        {
             std::cout << a[i][j] << " ";
         }
         std::cout << std::endl;
     }
 
+    std::cout << std::endl;
+
     //inserting a new column into the source array
-    for (j = 0; j < m; j++)
+    for (int j = 0; j < m; j++)
     {
         f = 0;
-        for (i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)
             if (a[i][j] == number)
             {
-                f = 1; 
+                f = 1;
                 break;
             }
         if (f == 1)
         {
-            for (k = m; k > j; k--)
-                for (i = 0; i < n; i++)
+            for (int k = m; k > j; k--)
+                
+                for (int i = 0; i < n; i++)
                     a[i][k] = a[i][k - 1];
-            for (i = 0; i < n; i++)
+            
+            for (int i = 0; i < n; i++)
                 a[i][j] = x[i];
-            m++; j++;
+            
+            m++; 
+            j++;
         }
     }
 
     //output a modified array
     std::cout << "The array after inserting columns: \n";
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (j = 0; j < m; j++)
+        for (int j = 0; j < m; j++)
+        {
             std::cout << a[i][j] << " ";
+        }
         std::cout << std::endl;
     }
 
+    std::cout << std::endl;
+
     //freeing up memory
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
         delete a[i];
+    
     delete[]a;
 }
 
